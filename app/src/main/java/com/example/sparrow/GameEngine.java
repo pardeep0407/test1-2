@@ -45,6 +45,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     Sprite player;
     Sprite sparrow;
+    Sprite cat;
 
     ArrayList<Square> bullets = new ArrayList<Square>();
 
@@ -74,13 +75,14 @@ public class GameEngine extends SurfaceView implements Runnable {
         // initalize sprites
         this.player = new Sprite(this.getContext(), 100, 700, R.drawable.player64);
         this.sparrow = new Sprite(this.getContext(), 500, 200, R.drawable.bird64);
+        this.cat = new Sprite(this.getContext(), 1500, 700, R.drawable.cat64);
 
     }
 
 
     private void printScreenInfo() {
 
-        Log.d(TAG, "Screen (screenW,screenH ) = " + this.screenWidth + "," + this.screenHeight);
+        Log.d(TAG, "Screen (screenW,screenH ) = " + this.VISIBLE_RIGHT + "," + this.VISIBLE_BOTTOM);
     }
 
 
@@ -140,7 +142,8 @@ public class GameEngine extends SurfaceView implements Runnable {
             // 2. sparrow
             canvas.drawBitmap(this.sparrow.getImage(), this.sparrow.getxPosition(), this.sparrow.getyPosition(), paintbrush);
 
-            // --------------------------------------------------------
+            // --3.cat
+            canvas.drawBitmap(this.cat.getImage(), this.cat.getxPosition(), this.cat.getyPosition(), paintbrush);
             // draw hitbox on player
             // --------------------------------------------------------
             Rect r = player.getHitbox();

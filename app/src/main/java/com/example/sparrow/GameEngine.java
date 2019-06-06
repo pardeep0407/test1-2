@@ -94,6 +94,22 @@ public class GameEngine extends SurfaceView implements Runnable {
             controlFPS();
         }
     }
+    // Game status - pause & resume
+    public void pauseGame() {
+        gameIsRunning = false;
+        try {
+            gameThread.join();
+        }
+        catch (InterruptedException e) {
+
+        }
+    }
+    public void  resumeGame() {
+        gameIsRunning = true;
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+    final int CAT_SPEED = 20;
 
     // Game Loop methods
     public void updateGame() {
@@ -145,11 +161,25 @@ public class GameEngine extends SurfaceView implements Runnable {
             // --3.cat
             canvas.drawBitmap(this.cat.getImage(), this.cat.getxPosition(), this.cat.getyPosition(), paintbrush);
             // draw hitbox on player
-            // --------------------------------------------------------
+            // 4. cage
+
+            int cageLeft = (this.screenWidth ) - 100;
+            int cageTop = (this.screenHeight - 30-100);
+            int cageRight = (this.screenWidth  + 100);
+            int cageBottom = (this.screenHeight - 30);
+            canvas.drawRect(cageLeft, cageTop, cageRight, cageBottom, paintbrush);
+
+
+
+
+
             Rect r = player.getHitbox();
             paintbrush.setStyle(Paint.Style.STROKE);
             canvas.drawRect(r, paintbrush);
 
+            Rect c = cat.getHitbox();
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(c, paintbrush);
 
             // --------------------------------------------------------
             // draw hitbox on player
@@ -183,25 +213,12 @@ public class GameEngine extends SurfaceView implements Runnable {
                 break;
             case MotionEvent.ACTION_DOWN:
                 break;
-       }
+        }
         return true;
     }
 
     // Game status - pause & resume
-    public void pauseGame() {
-        gameIsRunning = false;
-        try {
-            gameThread.join();
-        }
-        catch (InterruptedException e) {
 
-        }
-    }
-    public void  resumeGame() {
-        gameIsRunning = true;
-        gameThread = new Thread(this);
-        gameThread.start();
-    }
 
 }
 

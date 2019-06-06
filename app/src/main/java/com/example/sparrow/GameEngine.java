@@ -62,6 +62,8 @@ public class GameEngine extends SurfaceView implements Runnable {
         this.screenWidth = screenW;
         this.screenHeight = screenH;
 
+
+        this.printScreenInfo();
         // setup visible game play area variables
         this.VISIBLE_LEFT = 20;
         this.VISIBLE_TOP = 10;
@@ -72,7 +74,15 @@ public class GameEngine extends SurfaceView implements Runnable {
         // initalize sprites
         this.player = new Sprite(this.getContext(), 100, 700, R.drawable.player64);
         this.sparrow = new Sprite(this.getContext(), 500, 200, R.drawable.bird64);
+
     }
+
+
+    private void printScreenInfo() {
+
+        Log.d(TAG, "Screen (screenW,screenH ) = " + this.screenWidth + "," + this.screenHeight);
+    }
+
 
     @Override
     public void run() {
